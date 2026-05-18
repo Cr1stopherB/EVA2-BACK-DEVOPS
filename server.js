@@ -9,7 +9,7 @@ const {
   DB_HOST = "10.0.2.134", // acá colocar la IP Privada EC2 DB
   DB_USER = "root",
   DB_PASSWORD = "admin123",
-  DB_NAME = "tienda_perritos",
+  DB_NAME = "innovatech",
   DB_PORT = 3306,
 } = process.env;
 
@@ -130,7 +130,7 @@ app.delete("/api/productos/:id", async (req, res) => {
 
 // Endpoint de salud
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", message: "Backend de tienda de perritos en ejecución." });
+  res.json({ status: "ok", message: "Backend de Innovatech en ejecución." });
 });
 
 // Iniciar servidor
