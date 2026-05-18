@@ -1,4 +1,4 @@
-name: CI/CD Tienda Perritos - Backend
+name: CI/CD Innovatech - Backend
 
 on:
   push:
@@ -26,8 +26,8 @@ jobs:
     - name: Build imagen Backend y push a ECR
       run: |
         # Ahora el Dockerfile está en la raíz, no hace falta 'cd'
-        docker build -t tienda-backend .
-        docker tag tienda-backend:latest ${{ secrets.ECR_REPO_URL_BACKEND }}:latest
+        docker build -t innovatech-backend .
+        docker tag innovatech-backend:latest ${{ secrets.ECR_REPO_URL_BACKEND }}:latest
         docker push ${{ secrets.ECR_REPO_URL_BACKEND }}:latest
 
     - name: Desplegar Backend vía SSM
@@ -40,8 +40,8 @@ jobs:
             "set -e",
             "aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.ECR_REGISTRY }}",
             "docker pull ${{ secrets.ECR_REPO_URL_BACKEND }}:latest",
-            "docker stop tienda-backend || true",
-            "docker rm tienda-backend || true",
-            "docker run -d --name tienda-backend -p 3001:3001 -e DB_HOST=${{ secrets.DB_PRIVATE_IP }} -e DB_USER=alumno -e DB_PASSWORD=alumno123 -e DB_NAME=tienda_perritos ${{ secrets.ECR_REPO_URL_BACKEND }}:latest"
+            "docker stop innovatech-backend || true",
+            "docker rm innovatech-backend || true",
+            "docker run -d --name innovatech-backend -p 3001:3001 -e DB_HOST=${{ secrets.DB_PRIVATE_IP }} -e DB_USER=alumno -e DB_PASSWORD=alumno123 -e DB_NAME=innovatech ${{ secrets.ECR_REPO_URL_BACKEND }}:latest"
           ]}' \
           --output text
